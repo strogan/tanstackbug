@@ -52,8 +52,7 @@ export const SuperForm = withForm({
                 id={field.name}
                 name={field.name}
                 onBlur={field.handleBlur}
-                required
-                placeholder="Paste text that you want to transcreate here"
+                required 
               />
             )}
           />
@@ -90,7 +89,7 @@ export const SuperForm = withForm({
                 <button type="submit" disabled={!canSubmit}>
                   <div>
                     <div />
-                    {isSubmitting ? "Transcreating..." : "Transcreate"}
+                    {isSubmitting ? "Submitting..." : "Submit"}
                   </div>
                 </button>
               </div>
