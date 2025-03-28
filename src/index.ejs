@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single-SPA Application</title>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+          "@r/app": "http://localhost:8080/r-r.js",
+          "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
+          "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="single-spa-application:@r/app"></div>
+    <script>
+      System.import("single-spa").then(function (singleSpa) {
+        singleSpa.registerApplication(
+          "@r/app",
+          () => System.import("@r/app"),
+          (location) => true
+        );
+        singleSpa.start();
+      });
+    </script>
+  </body>
+</html>

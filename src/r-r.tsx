@@ -1,16 +1,15 @@
 import React from "react";
-import ReactDOMClient from "react-dom/client";
+import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
 import Root from "./root.component";
-
+ 
 const lifecycles = singleSpaReact({
   React,
-  ReactDOMClient,
+  ReactDOM,
   rootComponent: Root,
   errorBoundary() {
     //Add your error boundary here
-    return <></>;
+    return <div>Something went wrong</div>;
   },
-});
-
+}); 
 export const { bootstrap, mount, unmount } = lifecycles;

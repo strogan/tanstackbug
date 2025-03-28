@@ -1,5 +1,6 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
+const path = require("path");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -10,7 +11,20 @@ module.exports = (webpackConfigEnv, argv) => {
     outputSystemJS: true,
   });
 
+  const plugins = defaultConfig.plugins.filter(
+    (plugin) => plugin.constructor.name !== "HtmlWebpackPlugin"
+  );
+
   return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
+    plugins: plugins,
+    devServer: {
+      static: {
+        directory: path.join(__dirname, "public"),
+      },
+      historyApiFallback: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    },
   });
 };
